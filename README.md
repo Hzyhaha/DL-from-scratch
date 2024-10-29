@@ -1,1 +1,1 @@
-Codes written by Shower Hu are in the book "Deep Learning from Scratch".
+Codes written by Shower Hu are from the book "Deep Learning from Scratch".
