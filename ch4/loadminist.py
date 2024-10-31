@@ -20,6 +20,3 @@ for x,y in loader:
    Y.append(ay)
 X = np.array(X)
 Y = np.array(Y)
-
-# calculate the loss of minibatch
-
