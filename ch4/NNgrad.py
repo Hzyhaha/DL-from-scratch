@@ -10,7 +10,7 @@ def softmax(x):
 
 class simple_net:
     def __init__(self) -> None:
-        self.weight = np.random.random([2,3])
+        self.weight = np.random.rand(2,3)
 
     def predict(self,x):
         return x@self.weight
