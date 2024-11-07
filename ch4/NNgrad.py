@@ -29,6 +29,9 @@ if __name__ == '__main__':
     print(net.predict(x))
     t = np.array([0.0,1.0,0.0])
     print(net.loss(x,t))
+    # 目标函数是net的loss函数，这里不显含w,loss计算需要predict，predict中需要x和w乘
+    # 可以认为net中有w，但是为了计算f即loss需要x和t
+    # f函数可以访问外部的t和x变量
     def f(w):
         return net.loss(x,t)
     dw = numerical_diff(f,net.weight)
