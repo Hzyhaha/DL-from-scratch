@@ -59,15 +59,17 @@ if __name__ == '__main__':
 
     x,x_label,t,t_label = load_minist()
 
-    print(x.shape,x_label.shape)
-    print(t.shape,t_label.shape)
-
+    #print(x.shape,x_label.shape)
+    #print(t.shape,t_label.shape)
+    #print(x[0])
+    
     # SGD
-    iter_num = 1000
+    iter_num = 100
     trian_size = x.shape[0]
-    batch_size = 10
+    batch_size = 100
     lr = 0.1
     loss_list = []
+    
     for i in tqdm(range(iter_num)):
         idx_set = np.random.choice(trian_size,batch_size)
         data = x[idx_set]
@@ -81,3 +83,4 @@ if __name__ == '__main__':
     import pylab as plt
     plt.plot(np.arange(iter_num),loss_list)
     plt.show()
+    
