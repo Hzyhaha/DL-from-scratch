@@ -75,34 +75,40 @@ if __name__ == '__main__':
     from load_data import load_minist
     from tqdm import tqdm
     net = TwoLayerNet(input_size=784, hidden_size=100, output_size=10)
+    '''
     print(
     net.params['w1'].shape,
     net.params['b1'].shape,
     net.params['w2'].shape,  
     net.params['b2'].shape,
     )
+    '''
+    
 
-    x,x_label,t,t_label = load_minist()
+    x_train,t_train,x_test,t_test = load_minist()
   
     # SGD
     iter_num = 10000
-    trian_size = x.shape[0]
+    trian_size = x_train.shape[0]
     batch_size = 100
     lr = 0.1
     loss_list = []
     
+    
     for i in tqdm(range(iter_num)):
         idx_set = np.random.choice(trian_size,batch_size)
-        data = x[idx_set]
-        label = x_label[idx_set]
+        data = x_train[idx_set]
+        label = t_train[idx_set]
 
         grads = net.gradient(data,label)
         for key in ('w1','b1','w2','b2'):
             net.params[key] -= lr*grads[key]
         
         if i % 100 == 0:
-            loss_list.append(net.loss(x,x_label))
+            loss_list.append(net.loss(x_train,t_train))
 
     import pylab as plt
     plt.plot(loss_list)
     plt.show()
+
+    print('accuracy: ',net.accuracy(x_test,t_test))
