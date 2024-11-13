@@ -30,9 +30,14 @@ def ReLU2(x):
     return x*step_function(x)
 
 def softmax(x):
-    C = np.max(x)
-    tmp = np.exp(x-C)
-    return tmp/np.sum(tmp)
+    if x.ndim == 2:
+        x = x.T
+        x = x - np.max(x, axis=0)
+        y = np.exp(x) / np.sum(np.exp(x), axis=0)
+        return y.T 
+
+    x = x - np.max(x) # 溢出对策
+    return np.exp(x) / np.sum(np.exp(x))
 
 
 if __name__ == '__main__':

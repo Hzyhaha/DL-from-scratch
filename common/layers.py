@@ -1,7 +1,7 @@
 import numpy as np
 
 from activation_func import softmax
-from loss_func import cross_entropy_error
+from loss_func import minibatch_cross_entropy_error as cross_entropy_error
 
 '''
 大原则是反向传播时需要哪些 就需要记忆为self的属性
@@ -84,7 +84,7 @@ class Affine:
     
     def backward(self,dout):
         self.dw = self.x.T@dout
-        self.b = np.sum(dout,axis=0)
+        self.db = np.sum(dout,axis=0)
         dx = dout @ (self.w.T)
         return dx
     

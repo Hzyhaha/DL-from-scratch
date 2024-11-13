@@ -59,14 +59,16 @@ class TwoLayerNet :
         
         # 反向传播
         dout = self.lastlayer.backward()
-        for value in self.layers.values():
-            dout = value.backward(dout)
+        list_layers = list(self.layers.values()) 
+        list_layers.reverse() #注意反向传播哦！！！
+        for layer in list_layers: 
+            dout = layer.backward(dout)
         grads = {}
         grads['w1'],grads['b1'] = \
-        self.layers['Affine1'].dw, self.layers['Affine1'].db
+        self.layers['affine1'].dw, self.layers['affine1'].db
 
         grads['w2'],grads['b2'] = \
-        self.layers['Affine2'].dw, self.layers['Affine2'].db
+        self.layers['affine2'].dw, self.layers['affine2'].db
         return grads #返回梯度字典
 
 if __name__ == '__main__':
@@ -83,7 +85,7 @@ if __name__ == '__main__':
     x,x_label,t,t_label = load_minist()
   
     # SGD
-    iter_num = 100
+    iter_num = 10000
     trian_size = x.shape[0]
     batch_size = 100
     lr = 0.1
@@ -97,8 +99,10 @@ if __name__ == '__main__':
         grads = net.gradient(data,label)
         for key in ('w1','b1','w2','b2'):
             net.params[key] -= lr*grads[key]
-        loss_list.append(net.loss(data,label))
         
+        if i % 100 == 0:
+            loss_list.append(net.loss(x,x_label))
+
     import pylab as plt
-    plt.plot(np.arange(iter_num),loss_list)
+    plt.plot(loss_list)
     plt.show()
