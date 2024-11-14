@@ -1,9 +1,11 @@
 import numpy as np
 import sys 
 sys.path.append('./common')
+sys.path.append('.')
 from diffraction import numerical_diff
 from collections import OrderedDict
 from layers import Affine,Softmax_Loss_Layer,ReLU
+from ch6.sgd import SGD
 class TwoLayerNet :
     def __init__(self,
                  input_size,hidden_size,output_size,
@@ -101,9 +103,9 @@ if __name__ == '__main__':
         label = t_train[idx_set]
 
         grads = net.gradient(data,label)
-        for key in ('w1','b1','w2','b2'):
-            net.params[key] -= lr*grads[key]
-        
+        params = net.params
+        optimizer = SGD()
+        optimizer.update(params,grads)
         if i % 100 == 0:
             loss_list.append(net.loss(x_train,t_train))
 
