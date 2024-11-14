@@ -74,7 +74,6 @@ class TwoLayerNet :
 if __name__ == '__main__':
     from load_data import load_minist
     from tqdm import tqdm
-    from optimizer import *
     net = TwoLayerNet(input_size=784, hidden_size=100, output_size=10)
     '''
     print(
@@ -87,13 +86,13 @@ if __name__ == '__main__':
     
 
     x_train,t_train,x_test,t_test = load_minist()
-    
-    iter_num = 5000
+  
+    # SGD
+    iter_num = 10000
     trian_size = x_train.shape[0]
     batch_size = 100
     lr = 0.1
     loss_list = []
-    optimizer = AdaGrad(lr)
     
     
     for i in tqdm(range(iter_num)):
@@ -102,9 +101,8 @@ if __name__ == '__main__':
         label = t_train[idx_set]
 
         grads = net.gradient(data,label)
-        pararms = net.params
-        
-        optimizer.update(pararms,grads)
+        for key in ('w1','b1','w2','b2'):
+            net.params[key] -= lr*grads[key]
         
         if i % 100 == 0:
             loss_list.append(net.loss(x_train,t_train))

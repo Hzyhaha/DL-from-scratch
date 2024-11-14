@@ -26,3 +26,19 @@ class Momentum():
                                  -self.lr * grads[key]
             # 这里的速度是下降到最低点的速度，所以用加号
             params[key] += self.velocity[key]
+
+class AdaGrad:
+    def __init__(self,lr=0.01) -> None:
+        self.lr = lr
+        self.h = None
+
+    def update(self,params,grads):
+        if self.h == None:
+            self.h = {}
+            for key,val in params.items():
+                self.h[key] = np.zeros_like(val)
+        
+        for key in params.keys():
+            self.h[key] += grads[key]**2
+            params[key] -= \
+            self.lr*grads[key]/(1e-7+np.sqrt(self.h[key]))
