@@ -5,9 +5,9 @@ sys.path.append('.')
 from common.activation_func import *
 from common.loss_func import *
 from common.diffraction import numerical_diff
-
-from load_data import load_minist
+from common.load_data import load_minist
 from tqdm import tqdm
+
 class TwoLayerNet :
     def __init__(self,
                  input_size,hidden_size,output_size,
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     #print(x[0])
     
     # SGD
-    iter_num = 100
+    iter_num = 1000
     trian_size = x.shape[0]
     batch_size = 100
     lr = 0.1
