@@ -23,9 +23,9 @@ def toarray(data):
 
 def load_minist():
     train_data = datasets.MNIST(
-        root='data',
+        root='../data',
         transform=ToTensor(),
-        download=False,
+        download=True,
         train = True,
         target_transform=Compose([
             torch.tensor,
@@ -33,7 +33,7 @@ def load_minist():
         ])
     )
     test_data = datasets.MNIST(
-        root='data',
+        root='../data',
         transform=ToTensor(),
         download=True,
         train = False,

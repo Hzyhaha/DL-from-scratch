@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append('./common')
+sys.path.append('../common')
 from twolayernn import TwoLayerNet
 from optimizer import *
 from load_data import load_minist
