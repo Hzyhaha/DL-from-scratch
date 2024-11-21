@@ -2,10 +2,10 @@ import numpy as np
 
 import sys,os
 sys.path.append('.')
-from common.activation_func import *
-from common.loss_func import *
-from common.diffraction import numerical_diff
-from common.load_data import load_minist
+from hzy_common.activation_func import *
+from hzy_common.loss_func import *
+from hzy_common.diffraction import numerical_diff
+from hzy_common.load_data import load_minist
 from tqdm import tqdm
 
 class TwoLayerNet :

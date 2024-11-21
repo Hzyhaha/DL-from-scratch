@@ -1,8 +1,8 @@
 import numpy as np
 import sys
 sys.path.append('.')
-from common.activation_func import softmax
-from common.loss_func import cross_entropy_error
+from hzy_common.activation_func import softmax
+from hzy_common.loss_func import cross_entropy_error
 
 class Softmax_Loss_Layer:
     def __init__(self) -> None:
